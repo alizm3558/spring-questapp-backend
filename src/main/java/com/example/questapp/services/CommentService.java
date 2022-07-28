@@ -30,5 +30,7 @@ public class CommentService {
     }
 
 
-
+    public Comment getOneCommentById(Long commentId) {
+        return commentRepository.findById(commentId).orElse(null);
+    }
 }
