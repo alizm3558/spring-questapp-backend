@@ -2,6 +2,7 @@ package com.example.questapp.services;
 
 import com.example.questapp.entities.User;
 import com.example.questapp.repos.UserRepository;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public class UserService {
         return userRepository.save(newUser);
     }
 
-    public User getOneUser(Long userId) {
+    public User getOneUserById(Long userId) {
         return userRepository.findById(userId).orElse(null);
     }
 
@@ -47,6 +48,12 @@ public class UserService {
     }
 
     public void deleteById(Long userId) {
-        userRepository.deleteById(userId);
+        try {
+            userRepository.deleteById(userId);
+        }catch(EmptyResultDataAccessException e) { //user zaten yok, db'den empty result gelmiş
+            System.out.println("User "+userId+" doesn't exist"); //istersek loglayabiliriz
+        }
     }
+
+
 }

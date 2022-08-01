@@ -31,7 +31,7 @@ public class UserController {
     @GetMapping("/{userId}")
     public User getOneUser(@PathVariable Long userId) {
         //custom expection ekle , bu id olmayabilir
-        return userService.getOneUser(userId);
+        return userService.getOneUserById(userId);
     }
 
     @PutMapping("/{userId}") //güncelleme
